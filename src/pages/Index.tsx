@@ -95,7 +95,7 @@ const Index = () => {
               ))}
             </div>
 
-            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button>
               Начать проект
             </Button>
           </div>
@@ -124,16 +124,14 @@ const Index = () => {
             <div className="flex gap-4 justify-center">
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8"
                 onClick={() => scrollToSection('portfolio')}
               >
-                Смотреть работы
-                <Icon name="ArrowRight" className="ml-2" size={20} />
+                <span className="relative z-10">Смотреть работы</span>
+                <Icon name="ArrowRight" className="ml-2 relative z-10" size={20} />
               </Button>
               <Button 
                 size="lg" 
-                variant="outline" 
-                className="border-primary text-primary hover:bg-primary/10 text-lg px-8"
+                variant="outline"
                 onClick={() => scrollToSection('contact')}
               >
                 Связаться
@@ -294,11 +292,10 @@ const Index = () => {
             </div>
             
             <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-12"
+              size="lg"
             >
-              Связаться с нами
-              <Icon name="Send" className="ml-2" size={20} />
+              <span className="relative z-10">Связаться с нами</span>
+              <Icon name="Send" className="ml-2 relative z-10" size={20} />
             </Button>
           </div>
         </div>
