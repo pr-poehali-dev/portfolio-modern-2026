@@ -1,10 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [activeSection, setActiveSection] = useState('home');
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     setActiveSection(sectionId);
@@ -86,11 +93,11 @@ const Index = () => {
                     activeSection === section ? 'text-primary' : 'text-muted-foreground'
                   }`}
                 >
-                  {section === 'home' && 'Главная'}
-                  {section === 'portfolio' && 'Портфолио'}
-                  {section === 'services' && 'Услуги'}
-                  {section === 'about' && 'О студии'}
-                  {section === 'contact' && 'Контакты'}
+                  {section === 'home' && 'ГЛАВНАЯ'}
+                  {section === 'portfolio' && 'ПОРТФОЛИО'}
+                  {section === 'services' && 'УСЛУГИ'}
+                  {section === 'about' && 'О СТУДИИ'}
+                  {section === 'contact' && 'КОНТАКТЫ'}
                 </button>
               ))}
             </div>
@@ -104,23 +111,35 @@ const Index = () => {
 
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ 
+            backgroundImage: 'url(https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/75cebc3c-2ea1-4c73-b1f7-84e4b02277b4.jpg)',
+            transform: `translateY(${scrollY * 0.5}px)`,
+            opacity: 0.3
+          }}
+        />
         <div className="absolute inset-0">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-glow" />
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-glow" style={{ animationDelay: '1.5s' }} />
+          <div 
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-glow"
+            style={{ transform: `translateY(${scrollY * 0.3}px)` }}
+          />
+          <div 
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-glow" 
+            style={{ animationDelay: '1.5s', transform: `translateY(${scrollY * 0.2}px)` }} 
+          />
         </div>
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto text-center animate-fade-in">
-            <h1 className="text-6xl md:text-8xl font-heading font-black mb-6 leading-tight">
-              Создаем
+          <div 
+            className="max-w-4xl mx-auto text-center animate-fade-in"
+            style={{ transform: `translateY(${scrollY * 0.15}px)` }}
+          >
+            <h1 className="text-6xl md:text-9xl font-heading font-black mb-8 leading-tight uppercase">
               <span className="block bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-glow">
-                эпические
+                NEXUS STUDIO
               </span>
-              миры
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Веб-студия полного цикла, специализирующаяся на дизайне, иллюстрации и брендинге для MMORPG игр
-            </p>
             <div className="flex gap-4 justify-center">
               <Button 
                 size="lg" 
@@ -144,7 +163,7 @@ const Index = () => {
       <section id="portfolio" className="py-32 relative">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl font-heading font-bold mb-4">Наши работы</h2>
+            <h2 className="text-5xl font-heading font-bold mb-4 uppercase">Наши работы</h2>
             <p className="text-xl text-muted-foreground">Проекты, которыми мы гордимся</p>
           </div>
           
@@ -176,7 +195,7 @@ const Index = () => {
       <section id="services" className="py-32 bg-card/30 relative">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16 animate-fade-in">
-            <h2 className="text-5xl font-heading font-bold mb-4">Наши услуги</h2>
+            <h2 className="text-5xl font-heading font-bold mb-4 uppercase">Наши услуги</h2>
             <p className="text-xl text-muted-foreground">Полный цикл создания игровых проектов</p>
           </div>
           
@@ -204,7 +223,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16 animate-fade-in">
-              <h2 className="text-5xl font-heading font-bold mb-4">О студии</h2>
+              <h2 className="text-5xl font-heading font-bold mb-4 uppercase">О студии</h2>
               <p className="text-xl text-muted-foreground">Команда профессионалов с опытом в игровой индустрии</p>
             </div>
             
@@ -253,7 +272,7 @@ const Index = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <div className="animate-fade-in">
-              <h2 className="text-5xl font-heading font-bold mb-4">Начнем работу?</h2>
+              <h2 className="text-5xl font-heading font-bold mb-4 uppercase">Начнем работу?</h2>
               <p className="text-xl text-muted-foreground mb-12">
                 Свяжитесь с нами, чтобы обсудить ваш проект
               </p>
