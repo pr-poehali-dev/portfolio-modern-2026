@@ -39,33 +39,39 @@ const Index = () => {
 
   const portfolio = [
     {
-      title: 'Fantasy MMORPG Portal',
+      title: 'FANTASY MMORPG PORTAL',
       category: 'Веб-дизайн',
-      image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&auto=format'
+      description: 'Темный игровой портал с интерактивными элементами',
+      image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/ed8072ac-8b80-4013-b9a3-d55077e4fe9c.jpg'
     },
     {
-      title: 'Dragon Realm Logo',
+      title: 'DRAGON REALM LOGO',
       category: 'Брендинг',
-      image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format'
+      description: 'Эпический логотип для фэнтези MMORPG',
+      image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/4c5691a6-cde9-4173-a1d0-4bc911c934bc.jpg'
     },
     {
-      title: 'Character Illustrations',
+      title: 'CHARACTER ILLUSTRATIONS',
       category: 'Иллюстрация',
-      image: 'https://images.unsplash.com/photo-1618519764620-7403abdbdfe9?w=800&auto=format'
+      description: 'Концепт-арт персонажей с магическими эффектами',
+      image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/564670bf-1ddd-4e92-9f38-539fe22bdfe9.jpg'
     },
     {
-      title: 'Guild Website',
+      title: 'GUILD WEBSITE',
       category: 'Веб-дизайн',
+      description: 'Сайт для игровой гильдии с кастомным дизайном',
       image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format'
     },
     {
-      title: 'Game UI Design',
+      title: 'GAME UI DESIGN',
       category: 'UI/UX',
+      description: 'Интерфейс игрового меню и инвентаря',
       image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format'
     },
     {
-      title: 'Epic Battle Scene',
+      title: 'EPIC BATTLE SCENE',
       category: 'Иллюстрация',
+      description: 'Масштабная иллюстрация боевой сцены',
       image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&auto=format'
     }
   ];
@@ -160,33 +166,52 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="portfolio" className="py-32 relative">
-        <div className="container mx-auto px-6">
+      <section id="portfolio" className="py-32 relative bg-background">
+        <div className="container mx-auto px-6 max-w-7xl">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-5xl font-heading font-bold mb-4 uppercase">Наши работы</h2>
             <p className="text-xl text-muted-foreground">Проекты, которыми мы гордимся</p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="space-y-6 max-w-3xl mx-auto">
             {portfolio.map((item, index) => (
-              <Card 
+              <div 
                 key={index} 
-                className="group overflow-hidden bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                className="group relative rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="text-sm text-primary font-medium">{item.category}</span>
-                    <h3 className="text-xl font-heading font-bold text-foreground">{item.title}</h3>
+                <div className="flex flex-col md:flex-row gap-0">
+                  <div className="relative md:w-2/3 h-[400px] md:h-[500px] overflow-hidden">
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/80 md:to-background/90" />
+                  </div>
+                  
+                  <div className="md:absolute md:right-0 md:top-0 md:bottom-0 md:w-1/2 flex flex-col justify-center p-8 md:p-12 bg-card/95 backdrop-blur-sm">
+                    <div className="space-y-4">
+                      <span className="inline-block text-xs font-heading font-bold text-primary uppercase tracking-widest px-3 py-1 bg-primary/10 rounded-full">
+                        {item.category}
+                      </span>
+                      <h3 className="text-3xl md:text-4xl font-heading font-black text-foreground leading-tight">
+                        {item.title}
+                      </h3>
+                      <p className="text-muted-foreground text-lg leading-relaxed">
+                        {item.description}
+                      </p>
+                      <Button 
+                        variant="ghost" 
+                        className="group/btn mt-4 p-0 h-auto hover:bg-transparent"
+                      >
+                        <span className="text-primary font-heading font-bold uppercase text-sm">Смотреть проект</span>
+                        <Icon name="ArrowRight" className="ml-2 text-primary transition-transform group-hover/btn:translate-x-2" size={20} />
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
