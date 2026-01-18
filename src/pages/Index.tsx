@@ -39,40 +39,36 @@ const Index = () => {
 
   const portfolio = [
     {
-      title: 'FANTASY MMORPG PORTAL',
-      category: 'Веб-дизайн',
-      description: 'Темный игровой портал с интерактивными элементами',
+      title: 'FANTASY PORTAL',
       image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/ed8072ac-8b80-4013-b9a3-d55077e4fe9c.jpg'
     },
     {
-      title: 'DRAGON REALM LOGO',
-      category: 'Брендинг',
-      description: 'Эпический логотип для фэнтези MMORPG',
+      title: 'DRAGON LOGO',
       image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/4c5691a6-cde9-4173-a1d0-4bc911c934bc.jpg'
     },
     {
-      title: 'CHARACTER ILLUSTRATIONS',
-      category: 'Иллюстрация',
-      description: 'Концепт-арт персонажей с магическими эффектами',
+      title: 'CHARACTER ART',
       image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/564670bf-1ddd-4e92-9f38-539fe22bdfe9.jpg'
     },
     {
-      title: 'GUILD WEBSITE',
-      category: 'Веб-дизайн',
-      description: 'Сайт для игровой гильдии с кастомным дизайном',
+      title: 'GAME UI',
+      image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/47fd9d0e-326b-4046-a107-05612b579698.jpg'
+    },
+    {
+      title: 'CASTLE SCENE',
+      image: 'https://cdn.poehali.dev/projects/8acc7a0a-b687-4899-ac92-57a2e84d06ed/files/e6178e00-a4bc-41c3-89e6-ae880843a11c.jpg'
+    },
+    {
+      title: 'GUILD SITE',
       image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format'
     },
     {
-      title: 'GAME UI DESIGN',
-      category: 'UI/UX',
-      description: 'Интерфейс игрового меню и инвентаря',
-      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format'
+      title: 'BATTLE SCENE',
+      image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&auto=format'
     },
     {
-      title: 'EPIC BATTLE SCENE',
-      category: 'Иллюстрация',
-      description: 'Масштабная иллюстрация боевой сцены',
-      image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&auto=format'
+      title: 'EPIC DESIGN',
+      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format'
     }
   ];
 
@@ -173,41 +169,37 @@ const Index = () => {
             <p className="text-xl text-muted-foreground">Проекты, которыми мы гордимся</p>
           </div>
           
-          <div className="space-y-6 max-w-3xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
             {portfolio.map((item, index) => (
               <div 
                 key={index} 
-                className="group relative rounded-2xl overflow-hidden bg-card border border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group relative overflow-hidden cursor-pointer transition-all duration-500 hover:scale-105 hover:z-10"
+                style={{ 
+                  clipPath: index % 3 === 0 ? 'polygon(0 0, 100% 0, 100% 85%, 0 100%)' : 
+                            index % 3 === 1 ? 'polygon(0 0, 100% 0, 85% 100%, 0 100%)' : 
+                            'polygon(0 15%, 100% 0, 100% 100%, 0 100%)',
+                  height: index % 4 === 0 || index % 4 === 3 ? '320px' : '280px'
+                }}
               >
-                <div className="flex flex-col md:flex-row gap-0">
-                  <div className="relative md:w-2/3 h-[400px] md:h-[500px] overflow-hidden">
-                    <img 
-                      src={item.image} 
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-background/80 md:to-background/90" />
-                  </div>
+                <div className="relative w-full h-full">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/40 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
                   
-                  <div className="md:absolute md:right-0 md:top-0 md:bottom-0 md:w-1/2 flex flex-col justify-center p-8 md:p-12 bg-card/95 backdrop-blur-sm">
-                    <div className="space-y-4">
-                      <span className="inline-block text-xs font-heading font-bold text-primary uppercase tracking-widest px-3 py-1 bg-primary/10 rounded-full">
-                        {item.category}
-                      </span>
-                      <h3 className="text-3xl md:text-4xl font-heading font-black text-foreground leading-tight">
+                  <div className="absolute inset-0 flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div>
+                      <h3 className="text-lg font-heading font-bold text-foreground uppercase leading-tight">
                         {item.title}
                       </h3>
-                      <p className="text-muted-foreground text-lg leading-relaxed">
-                        {item.description}
-                      </p>
-                      <Button 
-                        variant="ghost" 
-                        className="group/btn mt-4 p-0 h-auto hover:bg-transparent"
-                      >
-                        <span className="text-primary font-heading font-bold uppercase text-sm">Смотреть проект</span>
-                        <Icon name="ArrowRight" className="ml-2 text-primary transition-transform group-hover/btn:translate-x-2" size={20} />
-                      </Button>
+                    </div>
+                  </div>
+                  
+                  <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="w-10 h-10 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center">
+                      <Icon name="ArrowUpRight" size={20} className="text-primary" />
                     </div>
                   </div>
                 </div>
