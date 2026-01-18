@@ -1,12 +1,338 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent } from '@/components/ui/card';
+import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const [activeSection, setActiveSection] = useState('home');
+
+  const scrollToSection = (sectionId: string) => {
+    setActiveSection(sectionId);
+    const element = document.getElementById(sectionId);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const services = [
+    {
+      icon: 'Globe',
+      title: 'Дизайн сайтов',
+      description: 'Создаем современные и функциональные веб-сайты для игровых проектов и студий'
+    },
+    {
+      icon: 'Palette',
+      title: 'Иллюстрация',
+      description: 'Разрабатываем уникальные иллюстрации для MMORPG, персонажей и игровых локаций'
+    },
+    {
+      icon: 'Sword',
+      title: 'Логотипы для MMORPG',
+      description: 'Создаем запоминающиеся логотипы и брендинг для игровых вселенных'
+    }
+  ];
+
+  const portfolio = [
+    {
+      title: 'Fantasy MMORPG Portal',
+      category: 'Веб-дизайн',
+      image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=800&auto=format'
+    },
+    {
+      title: 'Dragon Realm Logo',
+      category: 'Брендинг',
+      image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format'
+    },
+    {
+      title: 'Character Illustrations',
+      category: 'Иллюстрация',
+      image: 'https://images.unsplash.com/photo-1618519764620-7403abdbdfe9?w=800&auto=format'
+    },
+    {
+      title: 'Guild Website',
+      category: 'Веб-дизайн',
+      image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&auto=format'
+    },
+    {
+      title: 'Game UI Design',
+      category: 'UI/UX',
+      image: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&auto=format'
+    },
+    {
+      title: 'Epic Battle Scene',
+      category: 'Иллюстрация',
+      image: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=800&auto=format'
+    }
+  ];
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
+    <div className="min-h-screen bg-background text-foreground">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+                <Icon name="Sparkles" size={24} className="text-white" />
+              </div>
+              <span className="text-2xl font-heading font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                NEXUS
+              </span>
+            </div>
+            
+            <div className="hidden md:flex gap-8">
+              {['home', 'portfolio', 'services', 'about', 'contact'].map((section) => (
+                <button
+                  key={section}
+                  onClick={() => scrollToSection(section)}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    activeSection === section ? 'text-primary' : 'text-muted-foreground'
+                  }`}
+                >
+                  {section === 'home' && 'Главная'}
+                  {section === 'portfolio' && 'Портфолио'}
+                  {section === 'services' && 'Услуги'}
+                  {section === 'about' && 'О студии'}
+                  {section === 'contact' && 'Контакты'}
+                </button>
+              ))}
+            </div>
+
+            <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              Начать проект
+            </Button>
+          </div>
+        </div>
+      </nav>
+
+      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-secondary/10" />
+        <div className="absolute inset-0">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl animate-glow" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/20 rounded-full blur-3xl animate-glow" style={{ animationDelay: '1.5s' }} />
+        </div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="max-w-4xl mx-auto text-center animate-fade-in">
+            <h1 className="text-6xl md:text-8xl font-heading font-black mb-6 leading-tight">
+              Создаем
+              <span className="block bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent animate-glow">
+                эпические
+              </span>
+              миры
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Веб-студия полного цикла, специализирующаяся на дизайне, иллюстрации и брендинге для MMORPG игр
+            </p>
+            <div className="flex gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-8"
+                onClick={() => scrollToSection('portfolio')}
+              >
+                Смотреть работы
+                <Icon name="ArrowRight" className="ml-2" size={20} />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-primary text-primary hover:bg-primary/10 text-lg px-8"
+                onClick={() => scrollToSection('contact')}
+              >
+                Связаться
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" className="py-32 relative">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-5xl font-heading font-bold mb-4">Наши работы</h2>
+            <p className="text-xl text-muted-foreground">Проекты, которыми мы гордимся</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {portfolio.map((item, index) => (
+              <Card 
+                key={index} 
+                className="group overflow-hidden bg-card border-border hover:border-primary/50 transition-all duration-300 cursor-pointer"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="relative h-64 overflow-hidden">
+                  <img 
+                    src={item.image} 
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    <span className="text-sm text-primary font-medium">{item.category}</span>
+                    <h3 className="text-xl font-heading font-bold text-foreground">{item.title}</h3>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="services" className="py-32 bg-card/30 relative">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-5xl font-heading font-bold mb-4">Наши услуги</h2>
+            <p className="text-xl text-muted-foreground">Полный цикл создания игровых проектов</p>
+          </div>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {services.map((service, index) => (
+              <Card 
+                key={index}
+                className="bg-card border-border hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 group"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Icon name={service.icon} size={32} className="text-white" />
+                  </div>
+                  <h3 className="text-2xl font-heading font-bold mb-3">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="about" className="py-32 relative">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16 animate-fade-in">
+              <h2 className="text-5xl font-heading font-bold mb-4">О студии</h2>
+              <p className="text-xl text-muted-foreground">Команда профессионалов с опытом в игровой индустрии</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  NEXUS — это команда опытных дизайнеров, иллюстраторов и разработчиков, специализирующихся на создании визуального контента для MMORPG игр.
+                </p>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  Мы понимаем уникальные требования игровой индустрии и создаем решения, которые помогают проектам выделиться на конкурентном рынке.
+                </p>
+                <div className="grid grid-cols-3 gap-6 pt-6">
+                  <div>
+                    <div className="text-4xl font-heading font-bold text-primary mb-2">50+</div>
+                    <div className="text-sm text-muted-foreground">Проектов</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-heading font-bold text-primary mb-2">5+</div>
+                    <div className="text-sm text-muted-foreground">Лет опыта</div>
+                  </div>
+                  <div>
+                    <div className="text-4xl font-heading font-bold text-primary mb-2">20+</div>
+                    <div className="text-sm text-muted-foreground">Клиентов</div>
+                  </div>
+                </div>
+              </div>
+              
+              <Card className="bg-gradient-to-br from-primary/20 to-secondary/20 border-primary/30 p-8">
+                <CardContent className="p-0 space-y-4">
+                  {['Индивидуальный подход', 'Опыт в игровой индустрии', 'Современные технологии', 'Поддержка 24/7'].map((item, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                        <Icon name="Check" size={16} className="text-primary" />
+                      </div>
+                      <span className="text-lg">{item}</span>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-32 bg-card/30 relative">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <div className="animate-fade-in">
+              <h2 className="text-5xl font-heading font-bold mb-4">Начнем работу?</h2>
+              <p className="text-xl text-muted-foreground mb-12">
+                Свяжитесь с нами, чтобы обсудить ваш проект
+              </p>
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-8 mb-12">
+              <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Mail" size={24} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-semibold mb-2">Email</h3>
+                  <p className="text-muted-foreground">hello@nexus.studio</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name="MessageCircle" size={24} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-semibold mb-2">Telegram</h3>
+                  <p className="text-muted-foreground">@nexus_studio</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-card border-border hover:border-primary/50 transition-all duration-300">
+                <CardContent className="p-6 text-center">
+                  <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name="Phone" size={24} className="text-primary" />
+                  </div>
+                  <h3 className="font-heading font-semibold mb-2">Телефон</h3>
+                  <p className="text-muted-foreground">+7 (999) 123-45-67</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground text-lg px-12"
+            >
+              Связаться с нами
+              <Icon name="Send" className="ml-2" size={20} />
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <footer className="py-12 border-t border-border">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+                <Icon name="Sparkles" size={20} className="text-white" />
+              </div>
+              <span className="text-xl font-heading font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                NEXUS
+              </span>
+            </div>
+            
+            <p className="text-muted-foreground text-sm">
+              © 2026 NEXUS Studio. Все права защищены.
+            </p>
+            
+            <div className="flex gap-4">
+              {['Github', 'Twitter', 'Linkedin', 'Instagram'].map((social) => (
+                <button 
+                  key={social}
+                  className="w-10 h-10 rounded-full bg-muted hover:bg-primary/20 flex items-center justify-center transition-colors group"
+                >
+                  <Icon name={social} size={20} className="text-muted-foreground group-hover:text-primary transition-colors" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
